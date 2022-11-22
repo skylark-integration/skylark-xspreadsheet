@@ -1,0 +1,9 @@
+/**
+ * skylark-xspreadsheet - A version of xspreadsheet.js that ported to running on skylarkjs.
+ * @author Hudaokeji Co.,Ltd
+ * @version v0.9.0
+ * @link www.skylarkjs.org
+ * @license MIT
+ */
+define(["./dropdown","./element","./icon","../config"],function(e,t,s,n){"use strict";const l=[["thin",'<svg xmlns="http://www.w3.org/2000/svg" width="50" height="1" style="user-select: none;"><line x1="0" y1="0.5" x2="50" y2="0.5" stroke-width="1" stroke="black" style="user-select: none;"></line></svg>'],["medium",'<svg xmlns="http://www.w3.org/2000/svg" width="50" height="2" style="user-select: none;"><line x1="0" y1="1.0" x2="50" y2="1.0" stroke-width="2" stroke="black" style="user-select: none;"></line></svg>'],["thick",'<svg xmlns="http://www.w3.org/2000/svg" width="50" height="3" style="user-select: none;"><line x1="0" y1="1.5" x2="50" y2="1.5" stroke-width="3" stroke="black" style="user-select: none;"></line></svg>'],["dashed",'<svg xmlns="http://www.w3.org/2000/svg" width="50" height="1" style="user-select: none;"><line x1="0" y1="0.5" x2="50" y2="0.5" stroke-width="1" stroke="black" stroke-dasharray="2" style="user-select: none;"></line></svg>'],["dotted",'<svg xmlns="http://www.w3.org/2000/svg" width="50" height="1" style="user-select: none;"><line x1="0" y1="0.5" x2="50" y2="0.5" stroke-width="1" stroke="black" stroke-dasharray="1" style="user-select: none;"></line></svg>']];return class extends e{constructor(e){const i=new s("line-type");let o=0;const h=l.map((s,l)=>t.h("div",`${n.cssPrefix}-item state ${e===s[0]?"checked":""}`).on("click",()=>{h[o].toggle("checked"),h[l].toggle("checked"),o=l,this.hide(),this.change(s)}).child(t.h("div",`${n.cssPrefix}-line-type`).html(s[1])));super(i,"auto",!1,"bottom-left",...h)}}});
+//# sourceMappingURL=../sourcemaps/component/dropdown_linetype.js.map

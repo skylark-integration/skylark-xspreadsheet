@@ -1,0 +1,9 @@
+/**
+ * skylark-xspreadsheet - A version of xspreadsheet.js that ported to running on skylarkjs.
+ * @author Hudaokeji Co.,Ltd
+ * @version v0.9.0
+ * @link www.skylarkjs.org
+ * @license MIT
+ */
+define(["./validator","./cell_range"],function(e,t){"use strict";class r{constructor(e,t,r){this.refs=t,this.mode=e,this.validator=r}includes(e,r){const{refs:s}=this;for(let a=0;a<s.length;a+=1){if(t.CellRange.valueOf(s[a]).includes(e,r))return!0}return!1}addRef(e){this.remove(t.CellRange.valueOf(e)),this.refs.push(e)}remove(e){const r=[];this.refs.forEach(s=>{const a=t.CellRange.valueOf(s);if(a.intersects(e)){a.difference(e).forEach(e=>r.push(e.toString()))}else r.push(s)}),this.refs=r}getData(){const{refs:e,mode:t,validator:r}=this,{type:s,required:a,operator:i,value:l}=r;return{refs:e,mode:t,type:s,required:a,operator:i,value:l}}static valueOf({refs:t,mode:s,type:a,required:i,operator:l,value:n}){return new r(s,t,new e(a,i,n,l))}}return{Validations:class{constructor(){this._=[],this.errors=new Map}getError(e,t){return this.errors.get(`${e}_${t}`)}validate(e,t,r){const s=this.get(e,t),a=`${e}_${t}`,{errors:i}=this;if(null!==s){const[e,t]=s.validator.validate(r);e?i.delete(a):i.set(a,t)}else i.delete(a);return!0}add(t,s,{type:a,required:i,value:l,operator:n}){const o=new e(a,i,l,n),u=this.getByValidator(o);null!==u?u.addRef(s):this._.push(new r(t,[s],o))}getByValidator(e){for(let t=0;t<this._.length;t+=1){const r=this._[t];if(r.validator.equals(e))return r}return null}get(e,t){for(let r=0;r<this._.length;r+=1){const s=this._[r];if(s.includes(e,t))return s}return null}remove(e){this.each(t=>{t.remove(e)})}each(e){this._.forEach(t=>e(t))}getData(){return this._.filter(e=>e.refs.length>0).map(e=>e.getData())}setData(e){this._=e.map(e=>r.valueOf(e))}}}});
+//# sourceMappingURL=../sourcemaps/core/validation.js.map

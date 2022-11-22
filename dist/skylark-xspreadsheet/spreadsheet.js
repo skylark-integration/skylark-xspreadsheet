@@ -1,0 +1,9 @@
+/**
+ * skylark-xspreadsheet - A version of xspreadsheet.js that ported to running on skylarkjs.
+ * @author Hudaokeji Co.,Ltd
+ * @version v0.9.0
+ * @link www.skylarkjs.org
+ * @license MIT
+ */
+define(["./component/element","./core/data_proxy","./component/sheet","./component/bottombar","./config","./locale/locale"],function(t,e,s,a,h,i){"use strict";return class{constructor(e,i={}){let n=e;this.options=i,this.sheetIndex=1,this.datas=[],"string"==typeof e&&(n=document.querySelector(e)),this.bottombar=new a(()=>{const t=this.addSheet();this.sheet.resetData(t)},t=>{const e=this.datas[t];this.sheet.resetData(e)},()=>{this.deleteSheet()},(t,e)=>{this.datas[t].name=e}),this.data=this.addSheet();const r=t.h("div",`${h.cssPrefix}`).on("contextmenu",t=>t.preventDefault());n.appendChild(r.el),this.sheet=new s(r,this.data),r.child(this.bottombar.el)}addSheet(t,s=!0){const a=t||`sheet${this.sheetIndex}`,h=new e(a,this.options);return h.change=((...t)=>{this.sheet.trigger("change",...t)}),this.datas.push(h),this.bottombar.addItem(a,s),this.sheetIndex+=1,h}deleteSheet(){const[t,e]=this.bottombar.deleteItem();t>=0&&(this.datas.splice(t,1),e>=0&&this.sheet.resetData(this.datas[e]))}loadData(t){const e=Array.isArray(t)?t:[t];if(this.bottombar.clear(),this.datas=[],e.length>0)for(let t=0;t<e.length;t+=1){const s=e[t],a=this.addSheet(s.name,0===t);a.setData(s),0===t&&this.sheet.resetData(a)}return this}getData(){return this.datas.map(t=>t.getData())}cellText(t,e,s,a=0){return this.datas[a].setCellText(t,e,s,"finished"),this}cell(t,e,s=0){return this.datas[s].getCell(t,e)}cellStyle(t,e,s=0){return this.datas[s].getCellStyle(t,e)}reRender(){return this.sheet.table.render(),this}on(t,e){return this.sheet.on(t,e),this}validate(){const{validations:t}=this.data;return t.errors.size<=0}change(t){return this.sheet.on("change",t),this}static locale(t,e){i.locale(t,e)}}});
+//# sourceMappingURL=sourcemaps/spreadsheet.js.map
